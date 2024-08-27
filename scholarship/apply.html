@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(to right, #f4f4f4, #e6e9f0);
+        }
+
+        .form-container {
+            width: 50%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .form-navigation button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #004080;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        .form-navigation button:hover {
+            background-color: #002d59;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-section h2 {
+            color: #004080;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-section input,
+        .form-section select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form id="scholarshipForm">
+        <!-- Personal Details -->
+        <div class="form-section active" id="personalDetails">
+            <h2>Personal Details</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="scholarshipType">Type of Scholarship:</label>
+            <select id="scholarshipType" name="scholarshipType" required>
+                <option value="">Select Scholarship</option>
+                <option value="mr">MR Scholarship</option>
+                <option value="postMatric">Post Matric Scholarship</option>
+                <option value="community">Community Scholarship</option>
+            </select>
+
+            <p class="error" id="eligibilityError">You are not eligible for this scholarship.</p>
+        </div>
+
+        <!-- Institute Details -->
+        <div class="form-section" id="instituteDetails">
+            <h2>Institute Details</h2>
+            <label for="instituteName">Institute Name:</label>
+            <input type="text" id="instituteName" name="instituteName" required>
+
+            <label for="schoolType">Type of School (for MR Scholarship):</label>
+            <select id="schoolType" name="schoolType">
+                <option value="">Select School Type</option>
+                <option value="government">Government</option>
+                <option value="private">Private</option>
+            </select>
+        </div>
+
+        <!-- Bank Details -->
+        <div class="form-section" id="bankDetails">
+            <h2>Bank Details</h2>
+            <label for="bankName">Bank Name:</label>
+            <input type="text" id="bankName" name="bankName" required>
+
+            <label for="accountNumber">Account Number:</label>
+            <input type="text" id="accountNumber" name="accountNumber" required>
+
+            <label for="ifscCode">IFSC Code:</label>
+            <input type="text" id="ifscCode" name="ifscCode" required>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="form-navigation">
+            <button type="button" id="prevBtn" onclick="showPrevSection()">Previous</button>
+            <button type="button" id="nextBtn" onclick="showNextSection()">Next</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    let currentSection = 0;
+    const formSections = document.querySelectorAll('.form-section');
+
+    function showSection(n) {
+        formSections[currentSection].classList.remove('active');
+        currentSection = n;
+        formSections[currentSection].classList.add('active');
+        
+        if (currentSection === 0) {
+            document.getElementById('prevBtn').style.display = 'none';
+        } else {
+            document.getElementById('prevBtn').style.display = 'inline';
+        }
+        
+        if (currentSection === formSections.length - 1) {
+            document.getElementById('nextBtn').textContent = 'Submit';
+        } else {
+            document.getElementById('nextBtn').textContent = 'Next';
+        }
+    }
+
+    function showNextSection() {
+        if (currentSection === 0 && !checkEligibility()) {
+            document.getElementById('eligibilityError').style.display = 'block';
+            return;
+        }
+        document.getElementById('eligibilityError').style.display = 'none';
+        if (currentSection < formSections.length - 1) {
+            showSection(currentSection + 1);
+        } else {
+            document.getElementById('scholarshipForm').submit();
+        }
+    }
+
+    function showPrevSection() {
+        if (currentSection > 0) {
+            showSection(currentSection - 1);
+        }
+    }
+
+    function checkEligibility() {
+        const scholarshipType = document.getElementById('scholarshipType').value;
+        const schoolType = document.getElementById('schoolType').value;
+
+        if (scholarshipType === 'mr' && schoolType !== 'government') {
+            return false;
+        }
+
+        return true;
+    }
+
+    showSection(currentSection);
+</script>
+
+</body>
+</html>

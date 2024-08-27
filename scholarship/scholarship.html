@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>`
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(to right, #f4f4f4, #e6e9f0);
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background: linear-gradient(135deg, #004080, #002d59);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 30px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+       
+        .main-nav:hover {
+            background: linear-gradient(135deg, #003366, #001f3d);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: absolute;
+            left: 30px;
+        }
+
+        .logo-section img {
+            height: 80px;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .logo-section img:hover {
+            transform: scale(1.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .ministry-info {
+            text-align: center;
+        }
+
+        .ministry-info h1 {
+            color: white;
+            font-size: 2em;
+            margin: 0;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .ministry-info h4 {
+            color: white;
+            margin: 0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-nav:hover .ministry-info h1 {
+            color: #ffcc00;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .g20-logo {
+            position: absolute;
+            right: 30px;
+        }
+
+        .g20-logo a {
+            color: white;
+            font-size: 2.5em;
+            transition: color 0.3s ease, transform 0.4s ease;
+        }
+
+        .g20-logo a:hover {
+            color: #ffcc00;
+            transform: scale(1.25);
+        }
+
+       
+        .sub-nav {
+            background: linear-gradient(135deg, #0059b3, #003f80);
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+            margin-top: 100px; 
+        }
+
+        .sub-nav:hover {
+            background: linear-gradient(135deg, #004080, #002d59);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .sub-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 15px 0;
+            display: flex;
+            gap: 40px;
+        }
+
+        .sub-nav ul li {
+            position: relative;
+        }
+
+        .sub-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease, color 0.3s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .sub-nav ul li a:hover {
+            background: #003366;
+            color: #ffcc00;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .sub-nav ul li.dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .sub-nav ul li.dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 180px;
+            z-index: 1;
+            box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        .sub-nav ul li.dropdown:hover .dropdown-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sub-nav ul li.dropdown .dropdown-content a {
+            color: #004080;
+            padding: 14px 18px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .sub-nav ul li.dropdown .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: #ffcc00;
+        }
+
+
+        .schemes {
+            padding: 40px;
+            text-align: center;
+            
+        }
+
+        .schemes h2 {
+            font-size: 2.5em;
+            color: #004080;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .scheme-card {
+            text-align: center;
+            background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .scheme-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .scheme-card h3 {
+            font-size: 1.8em;
+            color: #004080;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .scheme-card p {
+            font-size: 1.2em;
+            color: #003366;
+        }
+
+        /* Hidden Schemes */
+        .hidden-schemes {
+            display: none;
+        }
+
+        .button-know-more {
+            background-color: #004080;
+            color: white;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.4s ease, box-shadow 0.4s ease;
+            font-size: 1.2em;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+
+        .button-know-more:hover {
+            background-color: #002d59;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="logo-section">
+            <a href="#"><i class="fa fa-university fa-4x" style="color: white;"></i></a>
+            <a href="#"><i class="fa fa-graduation-cap fa-4x" style="color: white;"></i></a>
+            <img src=" home2.png" alt="Ministry Logo">
+           
+        </div>
+        <div class="ministry-info">
+            <h1>WELCOME TO SCHOLARSPHERE</h1>
+            <h4>Your Gateway to Educational Opportunities</h4>
+        </div>
+       
+    </nav>
+
+    
+    <nav class="sub-nav">
+        <ul>
+            <li><a href="../apply/ind.html"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#" class="active"><i class="fa fa-th-large"></i> Schemes</a></li>
+            
+            <li><a href="#"><i class="fa fa-info-circle"></i>Status</a></li>
+            <li><a href="cont.html"><i class="fa fa-phone"></i>Contact</a></li>
+            <li class="dropdown">
+                <a href="#"> <i class="fa fa-caret-down"></i>Login</a>
+                <div class="dropdown-content">
+                    <a href="login1.html">Student Login</a>
+                    <a href="admin.html">Admin Login</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+   
+
+  
+    
+    
+        <h2>Scholarship Schemes</h2>
+
+        <div class="scheme-card">
+            <h3>BC-MBC&BCM COMMUNITY SCHOLARSHIP</h3>
+            <p>Last date to apply: 30 Sep, 2024</p>
+            <p>Benefits: </p>
+            <pre>
+                Useful for students pursuing their higher studies for their education purpose.
+                Scholarship amount: Per year As Per Course Duration
+                Target: As per applications received
+            </pre>
+            <a href="bc_mbc.php" class="button">Apply Now</a>
+            </div>
+            <div class="scheme-card">
+                <h3>MR SCHOLARSHIP</h3>
+                <p>Last date to apply: 30 Sep, 2024</p>
+                <p>Benefits: </p>
+                <pre>
+                    Useful for students pursuing their higher studies for their education purpose.
+                    Scholarship amount: Per year As Per Course Duration
+                    Target: As per applications received
+                </pre>
+                <a href="mr.html" class="button">Apply Now</a>
+                </div>
+       
+
+        <!-- Hidden Schemes -->
+        <div class="scheme-card">
+            <h3> SC&ST Community Scholarship</h3>
+            <pre>
+                Useful for students pursuing their higher studies for their education purpose.
+                Scholarship amount: Per year As Per Course Duration
+                Target: As per applications received
+            </pre>
+            <a href="sc_st.php" class="button">Apply Now</a>
+        </div>
+        <div class="hidden-schemes">
+            <div class="scheme-card">
+                <h3>Scheme 4</h3>
+                <pre>
+                    Useful for students pursuing their higher studies for their education purpose.
+                    Scholarship amount: Per year As Per Course Duration
+                    Target: As per applications received
+                </pre>
+                <a href="sc_st.php" class="button">Apply Now</a>
+            </div>
+
+            <div class="scheme-card">
+                <h3>Scheme 5</h3>
+                <pre>  
+                    Useful for students pursuing their higher studies for their education purpose.
+                    Scholarship amount: Per year As Per Course Duration
+                    Target: As per applications received
+                </pre>
+            </div>
+        </div>
+<center>
+        <button class="button-know-more" onclick="toggleSchemes()">Know More</button></center>
+    </div>
+
+    <script>
+        function toggleSchemes() {
+            var hiddenSchemes = document.querySelector('.hidden-schemes');
+            var button = document.querySelector('.button-know-more');
+            if (hiddenSchemes.style.display === 'none' || hiddenSchemes.style.display === '') {
+                hiddenSchemes.style.display = 'block';
+                button.textContent = 'Show Less';
+            } else {
+                hiddenSchemes.style.display = 'none';
+                button.textContent = 'Know More';
+            }
+        }
+    </script>
+</body>
+</html>

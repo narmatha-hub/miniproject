@@ -1,0 +1,50 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #f7f7f7;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+    display: none;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.step.active {
+    background-color: #4CAF50;
+}

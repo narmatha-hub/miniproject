@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Scholarship Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        .step.finish {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="regForm" method="post" action="apply_cs.php">
+            <h1>Community Scholarship Application</h1>
+            <div class="tab">
+                <h2>Personal Information:</h2>
+                <label for="firstname">Firstname:</label>
+                <input type="text" id="firstname" name="firstname" required>
+
+                <label for="mobilenumber">Mobile Number:</label>
+                <input type="text" id="mobilenumber" name="mobilenumber" required>
+
+                <label for="aadhar">Aadhar:</label>
+                <input type="text" id="aadhar" name="aadhar" required>
+            </div>
+
+            <div class="tab">
+                <h2>Institute Information:</h2>
+                <p><input type="file" name="bonafide" placeholder="Upload your certificate" required></p>
+            </div>
+
+            <div class="tab">
+                <h2>Bank Details:</h2>
+                <p><input type="text" id="ifsc_code" name="ifsc_code" placeholder="IFSC Code" required></p>
+            </div>
+
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
+
+        function showTab(n) {
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").style.display = "none";
+                document.querySelector("button[type='submit']").style.display = "inline";
+            } else {
+                document.getElementById("nextBtn").style.display = "inline";
+                document.querySelector("button[type='submit']").style.display = "none";
+            }
+            fixStepIndicator(n);
+        }
+
+        function nextPrev(n) {
+            var x = document.getElementsByClassName("tab");
+            x[currentTab].style.display = "none";
+            currentTab = currentTab + n;
+            if (currentTab >= x.length) {
+                document.getElementById("regForm").submit();
+                return false;
+            }
+            showTab(currentTab);
+        }
+
+        function fixStepIndicator(n) {
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            x[n].className += " active";
+        }
+    </script>
+</body>
+</html>
